@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fixed Sidebar with Active Menu Highlight</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+    }
+
+    /* 고정된 사이드바 스타일 */
+    .sidebar {
+      width: 270px; /* 사이드바 너비 */
+      background-color: #123456; /* 배경색 */
+      color: white;
+      height: 100vh; /* 화면 전체 높이 */
+      position: fixed; /* 화면에 고정 */
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* 세로 가운데 정렬 */
+      align-items: center; /* 가로 가운데 정렬 */
+    }
+
+    .sidebar img {
+      border-radius: 50%; /* 원형 이미지 */
+      width: 150px; /* 이미지 크기 */
+      height: 150px;
+      margin-bottom: 30px; /* 메뉴와 간격 추가 */
+      border: 5px solid rgba(255, 255, 255, 0.5); /* 옅은 테두리 추가 */
+    }
+
+    .sidebar a {
+      text-decoration: none;
+      color: white;
+      margin-bottom: 15px;
+      font-size: 18px; /* 메뉴 글자 크기 */
+    }
+
+    .sidebar a.active {
+      font-weight: bold; /* 활성화된 메뉴 강조 */
+      color: #ffcc00; /* 활성화된 메뉴 색상 */
+    }
+
+    .sidebar a:hover {
+      color: #ffcc00; /* 마우스 커서를 올렸을 때 글자 색상 변경 */
+    }
+
+    /* 메인 콘텐츠 스타일 */
+    .main-content {
+      margin-left: 270px; /* 사이드바의 너비만큼 여백 추가 */
+      width: calc(100% - 270px); /* 화면 너비에서 사이드바를 제외한 공간 */
+    }
+
+    .section {
+      height: 100vh; /* 각 섹션이 화면 세로 크기만큼 차지 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 24px;
+    }
+
+    .section:nth-child(odd) {
+      background-color: #f9f9f9; /* 밝은 배경색 */
+    }
+
+    .section:nth-child(even) {
+      background-color: #eeeeee; /* 약간 어두운 배경색 */
+    }
+  </style>
+</head>
+<body>
+  <!-- 고정된 사이드바 -->
+  <div class="sidebar">
+    <img src="image.png" alt="Profile Picture">
+    <a href="#section1">About</a>
+    <a href="#section2">Experience</a>
+    <a href="#section3">Education</a>
+    <a href="#section4">Skills</a>
+    <a href="#section5">Interests</a>
+    <a href="#section6">Awards</a>
+  </div>
+
+  <!-- 스크롤 가능한 메인 콘텐츠 -->
+  <div class="main-content">
+    <div id="section1" class="section">About Section</div>
+    <div id="section2" class="section">Experience Section</div>
+    <div id="section3" class="section">Education Section</div>
+    <div id="section4" class="section">Skills Section</div>
+    <div id="section5" class="section">Interests Section</div>
+    <div id="section6" class="section">Awards Section</div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // 모든 섹션과 메뉴 링크 가져오기
+    const sections = document.querySelectorAll('.section');
+    const menuLinks = document.querySelectorAll('.sidebar a');
+
+    // IntersectionObserver 설정
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // 현재 보이는 섹션 ID 가져오기
+          const id = entry.target.id;
+
+          // 모든 링크에서 active 클래스 제거
+          menuLinks.forEach((link) => link.classList.remove('active'));
+
+          // 현재 보이는 섹션에 해당하는 링크에 active 클래스 추가
+          const activeLink = document.querySelector(`.sidebar a[href="#${id}"]`);
+          activeLink.classList.add('active');
+        }
+      });
+    }, { threshold: 0.6 }); // 섹션이 화면의 60% 이상 보일 때 활성화
+
+    // 각 섹션을 관찰 대상으로 설정
+    sections.forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>

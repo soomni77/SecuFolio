@@ -73,48 +73,53 @@
     /* 반응형 디자인을 위한 미디어 쿼리 */
     @media screen and (max-width: 768px) {
       body {
-        flex-direction: column; /* 작은 화면에서는 세로 배치로 변경 */
+        flex-direction: column;
       }
 
       .sidebar {
-        width: 100%; /* 사이드바가 상단으로 이동하여 전체 너비를 차지 */
-        height: auto; /* 높이를 자동으로 설정 */
-        position: relative; /* 고정 위치 제거 */
-        flex-direction: row; /* 메뉴를 가로로 배치 */
-        justify-content: space-around; /* 메뉴 아이템 간격 조정 */
-        padding: 10px;
-        box-shadow: 0px 2px 5px rgba(0,0,0,0.2); /* 상단 그림자 추가 */
+        width: 100%;
+        height: auto;
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px 0;
+        box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
       }
 
       .sidebar img {
-        width: 50px; /* 작은 화면에서 이미지 크기 축소 */
-        height: 50px;
-        margin-bottom: 0; /* 간격 제거 */
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
         margin-right: 10px;
-        border-width: 2px; /* 테두리 두께 축소 */
+        border-width: 2px;
+      }
+
+      .sidebar a {
+        font-size: 16px;
+        margin: 5px 10px;
+        padding: 5px;
       }
 
       .main-content {
-        margin-left: 0; /* 콘텐츠가 전체 너비를 차지하도록 설정 */
+        margin-left: 0;
         width: 100%;
-        padding-top: 10px;
-      }
-      
-      .sidebar a {
-        font-size: 14px; /* 작은 화면에서 글자 크기 축소 */
-        margin-bottom: 0;
-        padding-left: 5px;
-        padding-right: 5px;
+        padding-top: 20px;
       }
     }
     
     @media screen and (max-width: 480px) {
-       .sidebar a {
-         font-size: 12px; 
-       }
-       .sidebar img{
-         display:none;}
-     }
+      .sidebar img {
+        width: 40px;
+        height: 40px;
+        margin-right: 5px;
+      }
+      
+      .sidebar a {
+        font-size: 14px;
+        margin: 3px 5px;
+      }
+    }
   </style>
 </head>
 <body>
